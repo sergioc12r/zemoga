@@ -21,25 +21,25 @@ class PostBloc extends Bloc<PostEvent,PostState>{
   @override
   Stream<PostState> mapEventToState(PostEvent event) async*{
     if(event is OnFavoritePostEvent){
-      post = post?.copyWith(isFavorite: true);
-      yield OnFetchedPostSate(post: post, loadLike: true);
       _repository!.db.favorite.addItem(post?.id ?? 0);
-      yield OnFetchedPostSate(post: post, loadLike: false);
+      post = post?.copyWith(isFavorite: true);
+      yield OnFetchedPostSate(post: post, loadLike: true,key:UniqueKey());
       postScreenBloc?.add(ReloadAlPostScreenEvent());
+      yield OnFetchedPostSate(post: post, loadLike: false,key:UniqueKey());
     }
 
     if(event is OnUnFavoritePostEvent){
-        post = post?.copyWith(isFavorite: false);
-        yield OnFetchedPostSate(post: post, loadLike: true);
         _repository!.db.favorite.delete(post!.id ?? 0);
-        yield OnFetchedPostSate(post: post, loadLike: false);
+        post = post?.copyWith(isFavorite: false);
+        yield OnFetchedPostSate(post: post, loadLike: true,key:UniqueKey());
         postScreenBloc?.add(ReloadAlPostScreenEvent());
+        yield OnFetchedPostSate(post: post, loadLike: false,key:UniqueKey());
     }
 
     if(event is OnRemovePostEvent){
       _repository!.db.postsEliminated.addItem(post!.id ?? 0);
       postScreenBloc?.add(ReloadAlPostScreenEvent());
-      yield OnFetchedPostSate(post: post, loadLike: false);
+      yield OnFetchedPostSate(post: post, loadLike: false,key:UniqueKey());
     }
 
 

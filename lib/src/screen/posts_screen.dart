@@ -5,8 +5,13 @@ import 'package:zemoga/src/bloc/post_screen/post_screen_event.dart';
 import 'package:zemoga/src/bloc/post_screen/post_screen_state.dart';
 import 'package:zemoga/src/common/ui/post_card.dart';
 import 'package:zemoga/src/common/ui/post_card_place_holder.dart';
+import 'package:zemoga/src/common/utils/colors.dart';
+import 'package:zemoga/src/common/utils/text_styles.dart';
 
 class PostsScreen extends StatefulWidget{
+  final Function()? reload;
+
+  const PostsScreen({Key? key, this.reload}) : super(key: key);
   @override
   State<StatefulWidget> createState() => _PostsScreenState();
 }
@@ -43,7 +48,18 @@ class _PostsScreenState extends State<PostsScreen>{
   }
 
   Widget _emptySpace(){
-    return Container(child: Center(child: Text('Empty'),),);
+    return Container(child: Center(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+      children: [
+        SizedBox(height: 50),
+        Text('Empty data, reload for retry', style: ZemogaTextStyles.robotoBold,),
+        GestureDetector(
+          onTap: ()=> widget.reload!(),
+          child: Icon(Icons.refresh, color: ZemogaColors.getTitleColor(),size: 50,),
+        ),
+      ],
+    ),),);
   }
 
   Widget _data(FetchDataPostScreenState? state) {

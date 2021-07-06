@@ -6,8 +6,13 @@ import 'package:zemoga/src/bloc/favorites_screen/fav_state.dart';
 import 'package:zemoga/src/bloc/post_screen/post_screen_bloc.dart';
 import 'package:zemoga/src/common/ui/post_card.dart';
 import 'package:zemoga/src/common/ui/post_card_place_holder.dart';
+import 'package:zemoga/src/common/utils/colors.dart';
 
 class FavScreen extends StatefulWidget{
+  final Function()? reload;
+
+  const FavScreen({Key? key, this.reload}) : super(key: key);
+
   @override
   State<StatefulWidget> createState() => _FavScreenState();
 }
@@ -52,7 +57,16 @@ class _FavScreenState extends State<FavScreen>{
   }
 
   Widget _emptySpace(){
-    return Container(child: Center(child: Text('Empty'),),);
+    return Container(child: Center(child: Column(
+      children: [
+        SizedBox(height: 50),
+        Text('Empty data, reload for retry'),
+        GestureDetector(
+          onTap: ()=> widget.reload!(),
+          child: Icon(Icons.refresh, color: ZemogaColors.getTitleColor(),size: 50,),
+        ),
+      ],
+    ),),);
   }
 
   Widget _data(FetchDataFavState? state) {

@@ -49,8 +49,20 @@ class _HomeScreen extends State<HomeScreen> with SingleTickerProviderStateMixin,
         _currentIndex = _tabController!.index;
       });
     });
-    _postScreen = PostsScreen();
-    _favScreen = FavScreen();
+    _postScreen = PostsScreen(
+      reload: (){
+        _postScreenBloc?.add(LoadingDataPostScreenEvent());
+        _currentIndex = 0;
+        _tabController!.animateTo(0, duration: Duration(milliseconds: 10));
+      },
+    );
+    _favScreen = FavScreen(
+      reload: (){
+        _postScreenBloc?.add(LoadingDataPostScreenEvent());
+        _currentIndex = 0;
+        _tabController!.animateTo(0, duration: Duration(milliseconds: 10));
+      },
+    );
     super.initState();
   }
 

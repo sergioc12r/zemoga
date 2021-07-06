@@ -28,6 +28,7 @@ dependencies:
   http_retry: ^0.2.0
   flutter_bloc: ^7.0.1
   equatable: ^2.0.3
+  cached_network_image: ^3.0.0
 
 
 

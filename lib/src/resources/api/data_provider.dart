@@ -4,6 +4,7 @@ import 'package:http/http.dart';
 import 'package:zemoga/src/models/api_response.dart';
 import 'package:zemoga/src/models/comment.dart';
 import 'package:zemoga/src/models/post.dart';
+import 'package:zemoga/src/models/user.dart';
 import 'package:zemoga/src/resources/service/data_service.dart';
 
 class DataProvider extends DataService{
@@ -28,9 +29,9 @@ class DataProvider extends DataService{
     }
   }
 
-  Future<ApiResponse<List<Comment>>>? fetchPostComments({Post? post})async{
+  Future<ApiResponse<List<Comment>>>? fetchPostComments({int? postId})async{
     try{
-      final response = await client.get(Uri.parse('$root/posts/${post?.id}/comments'));
+      final response = await client.get(Uri.parse('$root/posts/$postId/comments'));
       if(response.statusCode != 200) return ApiResponse(statusCode: 500, success: false, body:<Comment>[],message: response.body);
       final parsedJson = jsonDecode(response.body);
       Iterable i = parsedJson;
@@ -45,9 +46,9 @@ class DataProvider extends DataService{
     }
   }
 
-  Future<ApiResponse<Post>>? fetchPostDetail({Post? post})async{
+  Future<ApiResponse<Post>>? fetchPostDetail({int? postId})async{
     try{
-      final response = await client.get(Uri.parse('$root/posts/${post?.id}/comments'));
+      final response = await client.get(Uri.parse('$root/posts/$postId'));
       if(response.statusCode != 200) return ApiResponse(statusCode: 500, success: false,message: response.body);
       final parsedJson = jsonDecode(response.body);
       return ApiResponse(
@@ -57,6 +58,22 @@ class DataProvider extends DataService{
       );
     }catch(e){
       print('error in fetchAllPosts $e');
+      return ApiResponse(statusCode: 500, success: false);
+    }
+  }
+
+  Future<ApiResponse<User>>? fetchUserAuthor({int? userId})async{
+    try{
+      final response = await client.get(Uri.parse('$root/users/$userId'));
+      if(response.statusCode != 200) return ApiResponse(statusCode: 500, success: false,message: response.body);
+      final parsedJson = jsonDecode(response.body);
+      return ApiResponse(
+          success: true,
+          statusCode: response.statusCode,
+          body: User.fromJson(parsedJson)
+      );
+    }catch(e){
+      print('error in fetchUserPost $e');
       return ApiResponse(statusCode: 500, success: false);
     }
   }

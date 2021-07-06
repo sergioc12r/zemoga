@@ -9,6 +9,8 @@ class Utils{
 
   static Repository? get repository => _repository;
 
+  static String profilePlaceHolder = "https://180dc.org/wp-content/uploads/2017/11/profile-placeholder.png";
+
   static void inject({required Repository repository}) {
     _repository = repository;
   }

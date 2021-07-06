@@ -18,6 +18,8 @@ class ZemogaColors{
   static const Color grayBackground = const Color(0xFFE0E0E0);
   static const Color blackDark = const Color(0xFF092431);
 
+  static const BoxShadow defaultShadow = const BoxShadow(offset: Offset(1, 3), blurRadius: 6, color: Color(0x20000000));
+
   static Color getPrincipalColor()=> GlobalVariables.lightTheme ? principalColor : darkPrincipalColor;
 
   static Color getTitleColor () => GlobalVariables.lightTheme ? textTitleColor : darkTextTitleColor;

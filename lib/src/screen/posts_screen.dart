@@ -4,6 +4,7 @@ import 'package:zemoga/src/bloc/post_screen/post_screen_bloc.dart';
 import 'package:zemoga/src/bloc/post_screen/post_screen_event.dart';
 import 'package:zemoga/src/bloc/post_screen/post_screen_state.dart';
 import 'package:zemoga/src/common/ui/post_card.dart';
+import 'package:zemoga/src/common/ui/post_card_place_holder.dart';
 
 class PostsScreen extends StatefulWidget{
   @override
@@ -85,7 +86,7 @@ class _PostsScreenState extends State<PostsScreen>{
   }
 
   Widget _loadingWidget(){
-    return Center(child: CircularProgressIndicator());
+    return Center(child: CardPlaceHolder());
   }
 
 }

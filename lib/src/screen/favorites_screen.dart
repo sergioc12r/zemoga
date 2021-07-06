@@ -5,6 +5,7 @@ import 'package:zemoga/src/bloc/favorites_screen/fav_event.dart';
 import 'package:zemoga/src/bloc/favorites_screen/fav_state.dart';
 import 'package:zemoga/src/bloc/post_screen/post_screen_bloc.dart';
 import 'package:zemoga/src/common/ui/post_card.dart';
+import 'package:zemoga/src/common/ui/post_card_place_holder.dart';
 
 class FavScreen extends StatefulWidget{
   @override
@@ -95,7 +96,7 @@ class _FavScreenState extends State<FavScreen>{
   }
 
   Widget _loadingWidget(){
-    return Center(child: CircularProgressIndicator());
+    return Center(child: CardPlaceHolder());
   }
 
 }

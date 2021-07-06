@@ -8,6 +8,7 @@ import 'package:zemoga/src/bloc/post_detail/post_detail_event.dart';
 import 'package:zemoga/src/bloc/post_detail/post_detail_state.dart';
 import 'package:zemoga/src/common/ui/animated_favorite.dart';
 import 'package:zemoga/src/common/ui/comment_card.dart';
+import 'package:zemoga/src/common/ui/post_card_place_holder.dart';
 import 'package:zemoga/src/common/utils/colors.dart';
 import 'package:zemoga/src/common/utils/text_styles.dart';
 import 'package:zemoga/src/common/utils/utils.dart';
@@ -53,7 +54,7 @@ class _PostDetail extends State<PostDetail>{
   }
 
   Widget _loadingWidget(){
-    return Center(child: CircularProgressIndicator());
+    return Center(child: CardPlaceHolder());
   }
 
   Widget _allData(FetchDataDetailState state){

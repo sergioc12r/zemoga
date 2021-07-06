@@ -54,7 +54,9 @@ class _PostDetail extends State<PostDetail>{
   }
 
   Widget _loadingWidget(){
-    return Center(child: CardPlaceHolder());
+    return Scaffold(
+      body: Center(child: CardPlaceHolder()),
+    );
   }
 
   Widget _allData(FetchDataDetailState state){
@@ -82,6 +84,7 @@ class _PostDetail extends State<PostDetail>{
       padding: EdgeInsets.symmetric(horizontal: 10, vertical: 12),
       child: Column(
         mainAxisSize: MainAxisSize.min  ,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
           _bloc?.user == null ? Container() : _profileView(),
           SizedBox(height: 10),
@@ -90,6 +93,12 @@ class _PostDetail extends State<PostDetail>{
           _bodyView(),
           SizedBox(height: 10),
           Divider(),
+          SizedBox(height: 10),
+          Row(
+            children: [
+              Text('Comments', style: ZemogaTextStyles.robotoBold.copyWith(fontSize: 15), textAlign: TextAlign.start,),
+            ],
+          ),
           _commentView(),
           SizedBox(height: 10 + MediaQuery.of(context).padding.bottom)
         ],

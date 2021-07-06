@@ -21,9 +21,14 @@ class _CommentCardState extends State<CommentCard> with TickerProviderStateMixin
     return AnimatedSize(
       duration: const Duration(milliseconds: 200),
       vsync: this,
-      child: ListTile(
-        leading: buildPhoto(),
-        subtitle: buildBody(),
+      child: Column(
+        children: [
+          ListTile(
+            leading: buildPhoto(),
+            subtitle: buildBody(),
+          ),
+          Divider(),
+        ],
       ),
     );
   }
